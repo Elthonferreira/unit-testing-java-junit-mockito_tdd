@@ -1,15 +1,17 @@
-package br.ce.wcaquino.servicos;
-
-import static br.ce.wcaquino.utils.DataUtils.adicionarDias;
+package br.pe.elthon.services;
 
 import java.util.Date;
 
-import br.ce.wcaquino.entidades.Filme;
-import br.ce.wcaquino.entidades.Locacao;
-import br.ce.wcaquino.entidades.Usuario;
+import br.pe.elthon.entities.Filme;
+import br.pe.elthon.entities.Locacao;
+import br.pe.elthon.entities.Usuario;
+import org.junit.Assert;
+import org.junit.Test;
+
+import static br.pe.elthon.utils.DataUtils.*;
 
 public class LocacaoService {
-	
+
 	public Locacao alugarFilme(Usuario usuario, Filme filme) {
 		Locacao locacao = new Locacao();
 		locacao.setFilme(filme);
@@ -21,14 +23,11 @@ public class LocacaoService {
 		Date dataEntrega = new Date();
 		dataEntrega = adicionarDias(dataEntrega, 1);
 		locacao.setDataRetorno(dataEntrega);
-		
-		//Salvando a locacao...	
+
+		//Salvando a locacao...
 		//TODO adicionar método para salvar
-		
+
 		return locacao;
 	}
 
-	public static void main(String[] args) {
-		
-	}
 }

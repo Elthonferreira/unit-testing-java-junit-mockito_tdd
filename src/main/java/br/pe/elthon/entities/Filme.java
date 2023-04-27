@@ -1,4 +1,4 @@
-package br.ce.wcaquino.entidades;
+package br.pe.elthon.entities;
 
 public class Filme {
 
