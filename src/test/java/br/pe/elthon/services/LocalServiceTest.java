@@ -23,9 +23,9 @@ public class LocalServiceTest {
         Locacao locacao = locacaoService.alugarFilme(usuario, filme);
 
         // Verificação
-        Assert.assertTrue(locacao.getUsuario().getNome().equals("Elthon Ferreira"));
-        Assert.assertTrue(locacao.getFilme().getNome().equals("Interestelar"));
-        Assert.assertTrue(locacao.getValor().equals(49.99D));
+        Assert.assertEquals(locacao.getUsuario().getNome(),"Elthon Ferreira");
+        Assert.assertEquals(locacao.getFilme().getNome(), "Interestelar");
+        Assert.assertEquals(locacao.getValor(), 49.99, 0.01);
         Assert.assertTrue(isMesmaData(locacao.getDataLocacao(), new Date()));
         Assert.assertTrue(isMesmaData(locacao.getDataRetorno(), adicionarDias(locacao.getDataLocacao(), 1)));
     }
