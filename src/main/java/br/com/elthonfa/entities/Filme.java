@@ -1,4 +1,4 @@
-package br.pe.elthon.entities;
+package br.com.elthonfa.entities;
 
 public class Filme {
 

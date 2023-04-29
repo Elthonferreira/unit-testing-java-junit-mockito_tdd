@@ -1,4 +1,4 @@
-package br.pe.elthon.entities;
+package br.com.elthonfa.entities;
 
 import java.util.Objects;
 
