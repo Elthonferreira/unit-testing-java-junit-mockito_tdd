@@ -1,6 +1,6 @@
-package br.pe.elthon.services;
+package br.com.elthonfa.services;
 
-import br.pe.elthon.entities.Usuario;
+import br.com.elthonfa.entities.Usuario;
 import org.junit.Assert;
 import org.junit.Test;
 
