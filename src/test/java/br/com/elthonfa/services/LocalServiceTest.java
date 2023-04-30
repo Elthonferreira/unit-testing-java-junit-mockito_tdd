@@ -36,7 +36,7 @@ public class LocalServiceTest {
 
     }
 
-    @Test(expected = Exception.class) // Forma elegante (vantagem: pouco codigo)
+    @Test(expected = Exception.class)
     public void testeLocacaoFilmeSemEstoque() throws Exception {
         // Cenário
         LocacaoService locacaoService = new LocacaoService();
@@ -47,14 +47,24 @@ public class LocalServiceTest {
         Locacao locacao = locacaoService.alugarFilme(usuario, filme);
     }
 
-    @Test(expected = LocadoraException.class) // Forma elegante (vantagem: pouco codigo)
+    @Test(expected = LocadoraException.class)
     public void testeLocacaoUsuarioVazio() throws Exception {
         // Cenário
         LocacaoService locacaoService = new LocacaoService();
         Filme filme = new Filme("Interestelar", 5, 49.99D);
 
         // Ação
-        Locacao locacao = locacaoService.alugarFilme(new Usuario(), filme);
+        Locacao locacao = locacaoService.alugarFilme(null, filme);
+    }
+
+    @Test(expected = LocadoraException.class)
+    public void testeLocacaoFilmeVazio() throws Exception {
+        // Cenário
+        LocacaoService locacaoService = new LocacaoService();
+        Usuario usuario = new Usuario("Elthon");
+
+        // Ação
+        Locacao locacao = locacaoService.alugarFilme(usuario, null);
     }
 
 

@@ -12,16 +12,16 @@ import br.com.elthonfa.entities.Usuario;
 public class LocacaoService {
 
 	public Locacao alugarFilme(Usuario usuario, Filme filme) throws Exception {
-		if (filme.getEstoque() == 0) {
-			throw new FilmeSemEstoqueException();
-		}
-
 		if (usuario == null) {
 			throw new LocadoraException("Usuario nao existente.");
 		}
 
 		if (filme == null) {
 			throw new LocadoraException("Filme nao existente.");
+		}
+
+		if (filme.getEstoque() == 0) {
+			throw new FilmeSemEstoqueException();
 		}
 
 		Locacao locacao = new Locacao();
