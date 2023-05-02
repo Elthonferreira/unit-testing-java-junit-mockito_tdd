@@ -6,19 +6,24 @@ import br.com.elthonfa.entities.Usuario;
 import br.com.elthonfa.exceptions.LocadoraException;
 import br.com.elthonfa.utils.DataUtils;
 import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 
 import java.util.Date;
 
 public class LocalServiceTest {
 
+    private LocacaoService locacaoService;
+    @Before
+    public void funcaoQueIniciaANTESDeCadaTeste() {
+        locacaoService = new LocacaoService();
+    }
+
     @Test
     public void testeLocacao () throws Exception {
         // Cenário
-        LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Elthon Ferreira");
         Filme filme = new Filme("Interestelar", 2, 49.99D);
+
         // Ação
         Locacao locacao = locacaoService.alugarFilme(usuario, filme);
 
@@ -39,7 +44,6 @@ public class LocalServiceTest {
     @Test(expected = Exception.class)
     public void testeLocacaoFilmeSemEstoque() throws Exception {
         // Cenário
-        LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Elthon Ferreira");
         Filme filme = new Filme("Interestelar", 0, 49.99D);
 
@@ -49,21 +53,15 @@ public class LocalServiceTest {
 
     @Test(expected = LocadoraException.class)
     public void testeLocacaoUsuarioVazio() throws Exception {
-        // Cenário
-        LocacaoService locacaoService = new LocacaoService();
         Filme filme = new Filme("Interestelar", 5, 49.99D);
 
-        // Ação
         Locacao locacao = locacaoService.alugarFilme(null, filme);
     }
 
     @Test(expected = LocadoraException.class)
     public void testeLocacaoFilmeVazio() throws Exception {
-        // Cenário
-        LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Elthon");
 
-        // Ação
         Locacao locacao = locacaoService.alugarFilme(usuario, null);
     }
 
