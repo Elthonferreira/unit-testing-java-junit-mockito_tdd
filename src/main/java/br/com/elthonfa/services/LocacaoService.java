@@ -1,6 +1,7 @@
 package br.com.elthonfa.services;
 
 import java.util.Date;
+import java.util.List;
 
 import br.com.elthonfa.entities.Filme;
 import br.com.elthonfa.exceptions.FilmeSemEstoqueException;
@@ -11,24 +12,37 @@ import br.com.elthonfa.entities.Usuario;
 
 public class LocacaoService {
 
-	public Locacao alugarFilme(Usuario usuario, Filme filme) throws Exception {
+	public Double somatorioValorDosFilmes(List<Filme> filmes) {
+		Double somatorio = 0D;
+
+		for (Filme filme : filmes) {
+			somatorio += filme.getPrecoLocacao();
+		}
+
+		return somatorio;
+	}
+
+	public Locacao alugarFilmes(Usuario usuario, List<Filme> filmes) throws Exception {
 		if (usuario == null) {
 			throw new LocadoraException("Usuario nao existente.");
 		}
 
-		if (filme == null) {
-			throw new LocadoraException("Filme nao existente.");
+		if (filmes == null || filmes.isEmpty()) {
+			throw new LocadoraException("Filme(s) nao existente.");
 		}
 
-		if (filme.getEstoque() == 0) {
-			throw new FilmeSemEstoqueException();
+		for (Filme filme : filmes) {
+			if (filme.getEstoque() == 0) {
+				throw new FilmeSemEstoqueException();
+			}
 		}
+
 
 		Locacao locacao = new Locacao();
-		locacao.setFilme(filme);
+		locacao.setFilmes(filmes);
 		locacao.setUsuario(usuario);
 		locacao.setDataLocacao(new Date());
-		locacao.setValor(filme.getPrecoLocacao());
+		locacao.setValor(somatorioValorDosFilmes(filmes));
 
 		//Entrega no dia seguinte
 		Date dataEntrega = new Date();
