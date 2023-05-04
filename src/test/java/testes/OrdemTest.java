@@ -1,4 +1,4 @@
-package br.com.elthonfa.services;
+package testes;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;

@@ -1,4 +1,4 @@
-package br.com.elthonfa.services;
+package testes;
 
 import br.com.elthonfa.entities.Usuario;
 import org.junit.Assert;
