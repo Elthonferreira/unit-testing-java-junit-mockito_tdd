@@ -8,10 +8,7 @@ import br.com.elthonfa.utils.DataUtils;
 import org.hamcrest.CoreMatchers;
 import org.junit.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class LocalServiceTest {
 
@@ -159,6 +156,23 @@ public class LocalServiceTest {
 
         // Verificação
         Assert.assertEquals(locacao.getValor(), 350, 0.01);
+    }
+
+    @Test
+    public void deveDevolverNaSegundaAoAlugarNoSabado() throws Exception {
+        // Cenário
+        Usuario usuario = new Usuario("Elthon Ferreira");
+
+        List<Filme> filmes = new ArrayList<>();
+        Filme filme = new Filme("Interestelar", 10, 100D);
+        filmes.add(filme);
+
+        // Ação
+        Locacao locacao = locacaoService.alugarFilmes(usuario, filmes);
+
+        // Verificação
+        boolean isSegunda = DataUtils.isMesmoDiaDaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
+        Assert.assertTrue(isSegunda);
     }
 
 

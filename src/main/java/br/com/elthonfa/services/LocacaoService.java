@@ -1,5 +1,6 @@
 package br.com.elthonfa.services;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -68,13 +69,21 @@ public class LocacaoService {
         locacao.setValor(somatorioValorDosFilmes(filmes));
 
         Date dataEntrega = new Date();
-        dataEntrega = DataUtils.adicionarDias(dataEntrega, 1);
+        dataEntrega = DataUtils.adicionarDias(dataEntrega, 2);
         locacao.setDataRetorno(dataEntrega);
+
+        if (isDomingo(dataEntrega)) {
+            dataEntrega = DataUtils.adicionarDias(dataEntrega, 1);
+        }
 
         //Salvando a locacao...
         //TODO adicionar método para salvar
 
         return locacao;
+    }
+
+    private static boolean isDomingo(Date dataEntrega) {
+        return DataUtils.isMesmoDiaDaSemana(dataEntrega, Calendar.SUNDAY);
     }
 
 }

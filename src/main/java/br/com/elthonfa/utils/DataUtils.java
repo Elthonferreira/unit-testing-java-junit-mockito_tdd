@@ -77,7 +77,7 @@ public class DataUtils {
 	 * @param diaSemana <code>true</code> caso seja o dia da semana desejado, <code>false</code> em caso contrário 
 	 * @return
 	 */
-	public static boolean verificarDiaSemana(Date data, int diaSemana) {
+	public static boolean isMesmoDiaDaSemana(Date data, int diaSemana) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(data);
 		return calendar.get(DAY_OF_WEEK) == diaSemana;
