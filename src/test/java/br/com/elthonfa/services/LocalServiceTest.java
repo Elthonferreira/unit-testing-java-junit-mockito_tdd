@@ -20,6 +20,8 @@ public class LocalServiceTest {
 
     @Test
     public void deveAlugarFilme () throws Exception {
+        Assume.assumeFalse(DataUtils.isMesmoDiaDaSemana(new Date(), Calendar.SATURDAY));
+
         // Cenário
         Usuario usuario = new Usuario("Elthon Ferreira");
         List<Filme> filmes = Arrays.asList(new Filme("Interestelar", 2, 49.99D), new Filme("Ilha do medo", 2, 39.99D));
@@ -160,6 +162,8 @@ public class LocalServiceTest {
 
     @Test
     public void deveDevolverNaSegundaAoAlugarNoSabado() throws Exception {
+        Assume.assumeTrue(DataUtils.isMesmoDiaDaSemana(new Date(), Calendar.SATURDAY));
+
         // Cenário
         Usuario usuario = new Usuario("Elthon Ferreira");
 

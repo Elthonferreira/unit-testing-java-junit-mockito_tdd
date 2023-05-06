@@ -69,12 +69,12 @@ public class LocacaoService {
         locacao.setValor(somatorioValorDosFilmes(filmes));
 
         Date dataEntrega = new Date();
-        dataEntrega = DataUtils.adicionarDias(dataEntrega, 2);
-        locacao.setDataRetorno(dataEntrega);
+        dataEntrega = DataUtils.adicionarDias(dataEntrega, 1);
 
         if (isDomingo(dataEntrega)) {
             dataEntrega = DataUtils.adicionarDias(dataEntrega, 1);
         }
+        locacao.setDataRetorno(dataEntrega);
 
         //Salvando a locacao...
         //TODO adicionar método para salvar
