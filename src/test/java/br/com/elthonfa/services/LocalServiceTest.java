@@ -178,6 +178,4 @@ public class LocalServiceTest {
         boolean isSegunda = DataUtils.isMesmoDiaDaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
         Assert.assertTrue(isSegunda);
     }
-
-
 }
