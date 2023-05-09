@@ -14,6 +14,8 @@ import br.com.elthonfa.entities.Usuario;
 public class LocacaoService {
 
     private Double aplicarDesconto(Filme filme, int contador) {
+        if (contador == 1) return filme.getPrecoLocacao() * 0.90;
+
         if (contador == 2) return filme.getPrecoLocacao() * 0.75;
 
         if (contador == 3) return filme.getPrecoLocacao() * 0.50;
@@ -31,7 +33,7 @@ public class LocacaoService {
         for (int i = 0; i < filmes.size(); i++) {
             double precoFilme = filmes.get(i).getPrecoLocacao();
 
-            if (i >= 2 && i <= 5) {
+            if (i >= 1 && i <= 5) {
                 precoFilme = aplicarDesconto(filmes.get(i), i);
             }
 
