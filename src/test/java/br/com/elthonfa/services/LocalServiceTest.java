@@ -5,6 +5,8 @@ import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
 import br.com.elthonfa.exceptions.LocadoraException;
 import br.com.elthonfa.utils.DataUtils;
+import matchers.DiaSemanaMatcher;
+import matchers.MatchersProprios;
 import org.hamcrest.CoreMatchers;
 import org.junit.*;
 
@@ -85,5 +87,7 @@ public class LocalServiceTest {
         // Verificação
         boolean isSegunda = DataUtils.isMesmoDiaDaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
         Assert.assertTrue(isSegunda);
+        Assert.assertThat(locacao.getDataRetorno(), new DiaSemanaMatcher(Calendar.MONDAY));
+        Assert.assertThat(locacao.getDataLocacao(), MatchersProprios.caiNumaSegunda());
     }
 }
