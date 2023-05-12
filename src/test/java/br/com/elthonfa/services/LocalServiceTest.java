@@ -35,15 +35,16 @@ public class LocalServiceTest {
         Assert.assertEquals(locacao.getUsuario().getNome(),"Elthon Ferreira");
         Assert.assertEquals(locacao.getFilmes().get(0).getNome(), "Interestelar");
         Assert.assertEquals(locacao.getFilmes().get(1).getNome(), "Ilha do medo");
-        Assert.assertEquals(locacao.getValor(), 89.98, 0.01);
+        Assert.assertEquals(locacao.getValor(), 85.981, 0.01);
         Assert.assertTrue(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()));
         Assert.assertTrue(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.adicionarDias(locacao.getDataLocacao(), 1)));
 
         // Verificaçao com assertThat
         Assert.assertThat(locacao.getUsuario().getNome(), CoreMatchers.is("Elthon Ferreira"));
-        Assert.assertThat(locacao.getValor(), CoreMatchers.is(89.98));
+        Assert.assertThat(locacao.getValor(), CoreMatchers.is(85.981));
         Assert.assertThat(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()), CoreMatchers.is(true));
-
+        //Assert.assertEquals(locacao.getDataLocacao(), MatchersProprios.ehHoje());
+        Assert.assertEquals(locacao.getDataRetorno(), MatchersProprios.ehHojeComDiferencaDias(1));
     }
 
     @Test(expected = Exception.class)
