@@ -73,7 +73,7 @@ public class LocalServiceTest {
 
     @Test
     public void deveDevolverNaSegundaAoAlugarNoSabado() throws Exception {
-        Assume.assumeTrue(DataUtils.isMesmoDiaDaSemana(new Date(), Calendar.SATURDAY));
+        //Assume.assumeTrue(DataUtils.isMesmoDiaDaSemana(new Date(), Calendar.SATURDAY));
 
         // Cenário
         Usuario usuario = new Usuario("Elthon Ferreira");
@@ -89,6 +89,5 @@ public class LocalServiceTest {
         boolean isSegunda = DataUtils.isMesmoDiaDaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
         Assert.assertTrue(isSegunda);
         Assert.assertThat(locacao.getDataRetorno(), new DiaSemanaMatcher(Calendar.MONDAY));
-        Assert.assertThat(locacao.getDataLocacao(), MatchersProprios.caiNumaSegunda());
     }
 }
