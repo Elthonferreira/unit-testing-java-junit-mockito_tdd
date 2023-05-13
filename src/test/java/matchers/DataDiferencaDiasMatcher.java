@@ -19,6 +19,7 @@ public class DataDiferencaDiasMatcher extends TypeSafeMatcher<Date> {
         return DataUtils.isMesmaData(data, DataUtils.obterDataComDiferencaDias(quantidadeDeDias));
     }
 
+    @Override
     public void describeTo(Description description) {
 
     }

@@ -19,7 +19,7 @@ public class MatchersProprios {
         return new DataDiferencaDiasMatcher(dias);
     }
 
-    public static Date ehHoje() {
-        return new Date();
+    public static DataDiferencaDiasMatcher ehHoje() {
+        return new DataDiferencaDiasMatcher(0);
     }
 }
