@@ -5,6 +5,8 @@ import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
 import br.com.elthonfa.exceptions.LocadoraException;
 import br.com.elthonfa.utils.DataUtils;
+import builders.FilmeBuilder;
+import builders.UsuarioBuilder;
 import matchers.DiaSemanaMatcher;
 import matchers.MatchersProprios;
 import org.hamcrest.CoreMatchers;
@@ -25,7 +27,7 @@ public class LocalServiceTest {
         Assume.assumeFalse(DataUtils.isMesmoDiaDaSemana(new Date(), Calendar.SATURDAY));
 
         // Cenário
-        Usuario usuario = new Usuario("Elthon Ferreira");
+        Usuario usuario = UsuarioBuilder.umUsuario();
         List<Filme> filmes = Arrays.asList(new Filme("Interestelar", 2, 49.99D), new Filme("Ilha do medo", 2, 39.99D));
 
         // Ação
@@ -50,24 +52,23 @@ public class LocalServiceTest {
     @Test(expected = Exception.class)
     public void naoDeveAlugarFilmeSemEstoque() throws Exception {
         // Cenário
-        Usuario usuario = new Usuario("Elthon Ferreira");
-        List<Filme> filmes = Arrays.asList(new Filme("Interestelar", 0, 49.99D));
+        Usuario usuario = UsuarioBuilder.umUsuario();
+        List<Filme> filmes = Arrays.asList(FilmeBuilder.umFilmeSemEstoque());
 
         // Ação
-        Locacao locacao = locacaoService.alugarFilmes(usuario, filmes);
+        locacaoService.alugarFilmes(usuario, filmes);
     }
 
     @Test(expected = LocadoraException.class)
     public void naoDeveAlugarFilmeSemUsuario() throws Exception {
-        List<Filme> filmes = Arrays.asList(new Filme("Interestelar", 0, 49.99D));
+        List<Filme> filmes = Arrays.asList(FilmeBuilder.umFilme());
 
         Locacao locacao = locacaoService.alugarFilmes(null, filmes);
     }
 
     @Test(expected = LocadoraException.class)
     public void naoDeveAlugarFilmeSemFilme() throws Exception {
-        Usuario usuario = new Usuario("Elthon");
-
+        Usuario usuario = UsuarioBuilder.umUsuario();
         Locacao locacao = locacaoService.alugarFilmes(usuario, null);
     }
 
@@ -76,10 +77,10 @@ public class LocalServiceTest {
         //Assume.assumeTrue(DataUtils.isMesmoDiaDaSemana(new Date(), Calendar.SATURDAY));
 
         // Cenário
-        Usuario usuario = new Usuario("Elthon Ferreira");
+        Usuario usuario = UsuarioBuilder.umUsuario();
 
         List<Filme> filmes = new ArrayList<>();
-        Filme filme = new Filme("Interestelar", 10, 100D);
+        Filme filme = FilmeBuilder.umFilme();
         filmes.add(filme);
 
         // Ação
