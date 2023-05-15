@@ -27,7 +27,7 @@ public class FilmeBuilder {
         return filme;
     }
 
-    public static List<Filme> filmes(int quantidadeDeFilmes) {
+    public static List<Filme> criarNFilmes(int quantidadeDeFilmes) {
 
         List<Filme> filmes = new ArrayList<>();
         Filme filme = new Filme();
