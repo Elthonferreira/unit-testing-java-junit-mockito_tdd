@@ -10,6 +10,7 @@ import br.com.elthonfa.exceptions.LocadoraException;
 import br.com.elthonfa.utils.DataUtils;
 import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
+import buildermaster.BuilderMaster;
 
 public class LocacaoService {
 
@@ -86,6 +87,10 @@ public class LocacaoService {
 
     private static boolean isDomingo(Date dataEntrega) {
         return DataUtils.isMesmoDiaDaSemana(dataEntrega, Calendar.SUNDAY);
+    }
+
+    public static void main(String[] args) {
+        new BuilderMaster().gerarCodigoClasse(Locacao.class);
     }
 
 }
