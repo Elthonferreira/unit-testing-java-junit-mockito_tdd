@@ -76,4 +76,14 @@ public class CalculadoraTest {
         calc.dividir(primeiroNumero, segundoNumero);
     }
 
+    @Test
+    public void deveDividirDoisNumerosPassandoStringComoParametros() {
+        String a = "6";
+        String b = "3";
+
+        int resultado = calc.dividirComStringsComoParametros(a, b);
+
+        Assert.assertEquals(2, resultado);
+    }
+
 }

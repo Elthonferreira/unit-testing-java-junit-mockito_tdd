@@ -24,4 +24,8 @@ public class Calculadora {
 
         return primeiroNumero / segundoNumero;
     }
+
+    public int dividirComStringsComoParametros(String a, String b) {
+        return Integer.valueOf(a) / Integer.valueOf(b);
+    }
 }

@@ -89,8 +89,4 @@ public class LocacaoService {
         return DataUtils.isMesmoDiaDaSemana(dataEntrega, Calendar.SUNDAY);
     }
 
-    public static void main(String[] args) {
-        new BuilderMaster().gerarCodigoClasse(Locacao.class);
-    }
-
 }

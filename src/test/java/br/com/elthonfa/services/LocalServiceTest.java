@@ -74,7 +74,7 @@ public class LocalServiceTest {
 
     @Test
     public void deveDevolverNaSegundaAoAlugarNoSabado() throws Exception {
-        //Assume.assumeTrue(DataUtils.isMesmoDiaDaSemana(new Date(), Calendar.SATURDAY));
+        Assume.assumeTrue(DataUtils.isMesmoDiaDaSemana(new Date(), Calendar.SATURDAY));
 
         // Cenário
         Usuario usuario = UsuarioBuilder.umUsuario();
