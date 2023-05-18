@@ -3,6 +3,8 @@ package br.com.elthonfa.services;
 import br.com.elthonfa.entities.Filme;
 import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
+import br.com.elthonfa.repository.LocacaoRepository;
+import br.com.elthonfa.repository.LocacaoRepositoryFake;
 import builders.FilmeBuilder;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,6 +34,8 @@ public class CalculoValorLocacaoTest {
     @Before
     public void setup() {
         locacaoService = new LocacaoService();
+        LocacaoRepository locacaoRepository = new LocacaoRepositoryFake();
+        locacaoService.setLocacaoRepository(locacaoRepository);
     }
 
     @Parameterized.Parameters(name = "{2}") // {2} é o terceiro parâmetro

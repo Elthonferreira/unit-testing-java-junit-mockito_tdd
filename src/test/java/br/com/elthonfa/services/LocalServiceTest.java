@@ -4,6 +4,8 @@ import br.com.elthonfa.entities.Filme;
 import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
 import br.com.elthonfa.exceptions.LocadoraException;
+import br.com.elthonfa.repository.LocacaoRepository;
+import br.com.elthonfa.repository.LocacaoRepositoryFake;
 import br.com.elthonfa.utils.DataUtils;
 import builders.FilmeBuilder;
 import builders.UsuarioBuilder;
@@ -20,6 +22,8 @@ public class LocalServiceTest {
     @Before
     public void funcaoQueIniciaANTESDeCadaTeste() {
         locacaoService = new LocacaoService();
+        LocacaoRepository locacaoRepository = new LocacaoRepositoryFake();
+        locacaoService.setLocacaoRepository(locacaoRepository);
     }
 
     @Test

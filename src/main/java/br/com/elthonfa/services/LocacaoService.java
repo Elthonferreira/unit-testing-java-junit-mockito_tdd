@@ -7,12 +7,15 @@ import java.util.List;
 import br.com.elthonfa.entities.Filme;
 import br.com.elthonfa.exceptions.FilmeSemEstoqueException;
 import br.com.elthonfa.exceptions.LocadoraException;
+import br.com.elthonfa.repository.LocacaoRepository;
 import br.com.elthonfa.utils.DataUtils;
 import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
 import buildermaster.BuilderMaster;
 
 public class LocacaoService {
+
+    private LocacaoRepository locacaoRepository;
 
     private Double aplicarDesconto(Filme filme, int contador) {
         if (contador == 1) return filme.getPrecoLocacao() * 0.90;
@@ -80,9 +83,13 @@ public class LocacaoService {
         locacao.setDataRetorno(dataEntrega);
 
         //Salvando a locacao...
-        //TODO adicionar método para salvar
+        locacaoRepository.salvar(locacao);
 
         return locacao;
+    }
+
+    public void setLocacaoRepository(LocacaoRepository locacaoRepository) {
+        this.locacaoRepository = locacaoRepository;
     }
 
     private static boolean isDomingo(Date dataEntrega) {
