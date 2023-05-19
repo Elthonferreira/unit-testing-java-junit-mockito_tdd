@@ -5,7 +5,6 @@ import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
 import br.com.elthonfa.exceptions.LocadoraException;
 import br.com.elthonfa.repository.LocacaoRepository;
-import br.com.elthonfa.repository.LocacaoRepositoryFake;
 import br.com.elthonfa.utils.DataUtils;
 import builders.FilmeBuilder;
 import builders.UsuarioBuilder;
@@ -13,6 +12,7 @@ import matchers.DiaSemanaMatcher;
 import matchers.MatchersProprios;
 import org.hamcrest.CoreMatchers;
 import org.junit.*;
+import org.mockito.Mockito;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ public class LocalServiceTest {
     @Before
     public void funcaoQueIniciaANTESDeCadaTeste() {
         locacaoService = new LocacaoService();
-        LocacaoRepository locacaoRepository = new LocacaoRepositoryFake();
+        LocacaoRepository locacaoRepository = Mockito.mock(LocacaoRepository.class);
         locacaoService.setLocacaoRepository(locacaoRepository);
     }
 

@@ -4,13 +4,13 @@ import br.com.elthonfa.entities.Filme;
 import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
 import br.com.elthonfa.repository.LocacaoRepository;
-import br.com.elthonfa.repository.LocacaoRepositoryFake;
 import builders.FilmeBuilder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -34,7 +34,7 @@ public class CalculoValorLocacaoTest {
     @Before
     public void setup() {
         locacaoService = new LocacaoService();
-        LocacaoRepository locacaoRepository = new LocacaoRepositoryFake();
+        LocacaoRepository locacaoRepository = Mockito.mock(LocacaoRepository.class);
         locacaoService.setLocacaoRepository(locacaoRepository);
     }
 

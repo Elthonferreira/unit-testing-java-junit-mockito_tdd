@@ -11,7 +11,6 @@ import br.com.elthonfa.repository.LocacaoRepository;
 import br.com.elthonfa.utils.DataUtils;
 import br.com.elthonfa.entities.Locacao;
 import br.com.elthonfa.entities.Usuario;
-import buildermaster.BuilderMaster;
 
 public class LocacaoService {
 
