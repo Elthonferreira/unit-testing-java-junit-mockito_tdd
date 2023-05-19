@@ -19,11 +19,14 @@ import java.util.*;
 public class LocalServiceTest {
 
     private LocacaoService locacaoService;
+    SPCService spcService;
+    LocacaoRepository locacaoRepository;
     @Before
     public void funcaoQueIniciaANTESDeCadaTeste() {
         locacaoService = new LocacaoService();
-        LocacaoRepository locacaoRepository = Mockito.mock(LocacaoRepository.class);
+        locacaoRepository = Mockito.mock(LocacaoRepository.class);
         locacaoService.setLocacaoRepository(locacaoRepository);
+        spcService = Mockito.mock(SPCService.class);
     }
 
     @Test
@@ -94,5 +97,18 @@ public class LocalServiceTest {
         boolean isSegunda = DataUtils.isMesmoDiaDaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
         Assert.assertTrue(isSegunda);
         Assert.assertThat(locacao.getDataRetorno(), new DiaSemanaMatcher(Calendar.MONDAY));
+    }
+
+    @Test(expected = LocadoraException.class)
+    public void naoDeveAlugarFilmeParaNegativadoSPC() throws Exception {
+        // Cenário
+        Usuario usuario = UsuarioBuilder.umUsuario();
+        List<Filme> filmes = new ArrayList<>();
+        Filme filme = FilmeBuilder.umFilme();
+        filmes.add(filme);
+
+        Mockito.when(spcService.possuiNegativacao(usuario)).thenReturn(true);
+
+        locacaoService.alugarFilmes(usuario, filmes);
     }
 }
