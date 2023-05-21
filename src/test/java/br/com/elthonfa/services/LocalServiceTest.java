@@ -23,10 +23,12 @@ public class LocalServiceTest {
     LocacaoRepository locacaoRepository;
     @Before
     public void funcaoQueIniciaANTESDeCadaTeste() {
-        locacaoService = new LocacaoService();
         locacaoRepository = Mockito.mock(LocacaoRepository.class);
-        locacaoService.setLocacaoRepository(locacaoRepository);
         spcService = Mockito.mock(SPCService.class);
+
+        locacaoService = new LocacaoService();
+        locacaoService.setLocacaoRepository(locacaoRepository);
+        locacaoService.setSPCService(spcService);
     }
 
     @Test

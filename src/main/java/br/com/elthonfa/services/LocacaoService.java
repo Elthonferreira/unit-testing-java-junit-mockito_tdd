@@ -15,7 +15,7 @@ import br.com.elthonfa.entities.Usuario;
 public class LocacaoService {
 
     private LocacaoRepository locacaoRepository;
-    private SPCService spcService ;
+    private SPCService spcService;
 
     private static boolean isDomingo(Date dataEntrega) {
         return DataUtils.isMesmoDiaDaSemana(dataEntrega, Calendar.SUNDAY);
@@ -67,14 +67,14 @@ public class LocacaoService {
                 throw new FilmeSemEstoqueException();
             }
         }
-
-        if (spcService.possuiNegativacao(usuario)) {
-            throw new LocadoraException("Usuário negativado.");
-        }
     }
 
     public Locacao alugarFilmes(Usuario usuario, List<Filme> filmes) throws Exception {
         verificacoesDeErrosDaLocacao(usuario, filmes);
+
+        if (spcService.possuiNegativacao(usuario)) {
+            throw new LocadoraException("Usuário negativado.");
+        }
 
         Locacao locacao = new Locacao();
         locacao.setFilmes(filmes);
@@ -100,7 +100,7 @@ public class LocacaoService {
         this.locacaoRepository = locacaoRepository;
     }
 
-    public void setSpcService(SPCService spcService) {
-        this.spcService = spcService;
+    public void setSPCService(SPCService spc) {
+       spcService = spc;
     }
 }
