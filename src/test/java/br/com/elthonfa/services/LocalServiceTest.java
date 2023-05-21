@@ -105,6 +105,7 @@ public class LocalServiceTest {
     public void naoDeveAlugarFilmeParaNegativadoSPC() throws Exception {
         // Cenário
         Usuario usuario = UsuarioBuilder.umUsuario();
+        Usuario usuarioComNomeCompleto = UsuarioBuilder.umUsuarioComNomeCompleto();
         List<Filme> filmes = new ArrayList<>();
         Filme filme = FilmeBuilder.umFilme();
         filmes.add(filme);

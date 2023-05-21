@@ -67,14 +67,14 @@ public class LocacaoService {
                 throw new FilmeSemEstoqueException();
             }
         }
-    }
-
-    public Locacao alugarFilmes(Usuario usuario, List<Filme> filmes) throws Exception {
-        verificacoesDeErrosDaLocacao(usuario, filmes);
 
         if (spcService.possuiNegativacao(usuario)) {
             throw new LocadoraException("Usuário negativado.");
         }
+    }
+
+    public Locacao alugarFilmes(Usuario usuario, List<Filme> filmes) throws Exception {
+        verificacoesDeErrosDaLocacao(usuario, filmes);
 
         Locacao locacao = new Locacao();
         locacao.setFilmes(filmes);

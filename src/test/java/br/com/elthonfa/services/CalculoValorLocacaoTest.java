@@ -21,6 +21,10 @@ public class CalculoValorLocacaoTest {
 
     private LocacaoService locacaoService;
 
+    LocacaoRepository locacaoRepository;
+
+    SPCService spcService;
+
     @Parameterized.Parameter(value = 0) // primeiro parâmetro do @Parameters
     public List<Filme> filmes;
 
@@ -33,9 +37,12 @@ public class CalculoValorLocacaoTest {
 
     @Before
     public void setup() {
+        locacaoRepository = Mockito.mock(LocacaoRepository.class);
+        spcService = Mockito.mock(SPCService.class);
+
         locacaoService = new LocacaoService();
-        LocacaoRepository locacaoRepository = Mockito.mock(LocacaoRepository.class);
         locacaoService.setLocacaoRepository(locacaoRepository);
+        locacaoService.setSPCService(spcService);
     }
 
     @Parameterized.Parameters(name = "{2}") // {2} é o terceiro parâmetro
