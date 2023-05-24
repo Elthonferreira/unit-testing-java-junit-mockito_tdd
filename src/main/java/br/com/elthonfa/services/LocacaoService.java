@@ -16,6 +16,7 @@ public class LocacaoService {
 
     private LocacaoRepository locacaoRepository;
     private SPCService spcService;
+    private EmailService emailService;
 
     private static boolean isDomingo(Date dataEntrega) {
         return DataUtils.isMesmoDiaDaSemana(dataEntrega, Calendar.SUNDAY);
@@ -96,11 +97,23 @@ public class LocacaoService {
         return locacao;
     }
 
+    public void notificarAtrasos() {
+        List<Locacao> locacoes = locacaoRepository.obterLocacoesPendentes();
+
+        for (Locacao locacao : locacoes) {
+            emailService.notificarAtraso(locacao.getUsuario());
+        }
+    }
+
     public void setLocacaoRepository(LocacaoRepository locacaoRepository) {
         this.locacaoRepository = locacaoRepository;
     }
 
     public void setSPCService(SPCService spc) {
        spcService = spc;
+    }
+
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
     }
 }
