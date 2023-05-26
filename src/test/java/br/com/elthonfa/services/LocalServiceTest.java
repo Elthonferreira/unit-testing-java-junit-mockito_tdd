@@ -7,6 +7,7 @@ import br.com.elthonfa.exceptions.LocadoraException;
 import br.com.elthonfa.repository.LocacaoRepository;
 import br.com.elthonfa.utils.DataUtils;
 import builders.FilmeBuilder;
+import builders.LocacaoBuilder;
 import builders.UsuarioBuilder;
 import matchers.DiaSemanaMatcher;
 import matchers.MatchersProprios;
@@ -19,16 +20,19 @@ import java.util.*;
 public class LocalServiceTest {
 
     private LocacaoService locacaoService;
-    SPCService spcService;
-    LocacaoRepository locacaoRepository;
+    private SPCService spcService;
+    private LocacaoRepository locacaoRepository;
+    private EmailService emailService;
     @Before
     public void funcaoQueIniciaANTESDeCadaTeste() {
         locacaoRepository = Mockito.mock(LocacaoRepository.class);
         spcService = Mockito.mock(SPCService.class);
+        emailService = Mockito.mock(EmailService.class);
 
         locacaoService = new LocacaoService();
         locacaoService.setLocacaoRepository(locacaoRepository);
         locacaoService.setSPCService(spcService);
+        locacaoService.setEmailService(emailService);
     }
 
     @Test
@@ -105,7 +109,7 @@ public class LocalServiceTest {
     public void naoDeveAlugarFilmeParaNegativadoSPC() throws Exception {
         // Cenário
         Usuario usuario = UsuarioBuilder.umUsuario();
-        Usuario usuarioComNomeCompleto = UsuarioBuilder.umUsuarioComNomeCompleto();
+        Usuario usuarioComNomeCompleto = UsuarioBuilder.umUsuarioComNomeCompleto(); // caso de erro
         List<Filme> filmes = new ArrayList<>();
         Filme filme = FilmeBuilder.umFilme();
         filmes.add(filme);
@@ -113,5 +117,22 @@ public class LocalServiceTest {
         Mockito.when(spcService.possuiNegativacao(usuario)).thenReturn(true);
 
         locacaoService.alugarFilmes(usuario, filmes);
+
+        Mockito.verify(spcService).possuiNegativacao(usuario);
+    }
+
+    @Test
+    public void deveEnviarEmailParaLocacoesAtrasadas() {
+        Usuario usuario = UsuarioBuilder.umUsuario();
+        Usuario usuarioComNomeCompleto = UsuarioBuilder.umUsuarioComNomeCompleto(); // caso de erro
+
+        List<Locacao> locacoes = Arrays.asList(LocacaoBuilder.umLocacao().comUsuario(usuario).
+                comDataRetorno(DataUtils.obterDataComDiferencaDias(-2)).agora());
+
+        Mockito.when(locacaoRepository.obterLocacoesPendentes()).thenReturn(locacoes);
+
+        locacaoService.notificarAtrasos();
+
+        Mockito.verify(emailService).notificarAtraso(usuario);
     }
 }
